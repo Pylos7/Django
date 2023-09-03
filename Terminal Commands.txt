@@ -15,4 +15,3 @@ py manage.py runserver - Run Server #2
 py manage.py runserver 8001 - Run Setver at Port 8001
 select interpreter in VSCode
 python manage.py startapp app - Create App
-test
