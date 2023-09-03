@@ -1,0 +1,134 @@
+Section 7: Django Forms + Bitly Clone Project
+Resources: https://github.com/vacchiano/ZTM-Django-forms
+
+Setting Up Our Link Shortener Django Project:
+
+    Create virtual environment
+    py -m venv env
+
+    Activate virtual environment
+    source env/Scripts/activate
+    
+    Insstall Django
+    pip install django
+
+    Start Django project
+    django-admin startproject config .
+
+    Run server
+    py manage.py runserver
+
+Creating Our Link App and Models:
+
+    Start Django App
+    py manage.py startapp links
+
+    1. Add newly added app to setings.py installed apps
+    # Local apps
+    'links',
+
+    2 .Create the link model to store our links in the database
+    In project folder models.py
+
+    Make migrations
+    py manage.py makemigrations
+
+    Apply makemigrations
+    py manage.py migrate
+
+Registering Our Link Model with the Admin:
+
+    In app folders admin.py import new model from .models
+    admin.site.register(Link)
+
+Create admin superuser:
+
+    py manage.py createsuperuser
+
+Links View and URL Setup:
+
+    Make urls.py in app folder
+    import include from dgango.urls
+
+    Add path to configs urls.py
+    path('', include('links.urls')),
+
+    In views.py create a view index that takes a request and retuns
+    render request 'links/index.html' and passes empty dict as context
+
+    In app folders urls.py import above view from views.py
+
+Querying the Links from the Database:
+
+    Go into views.py
+    Import Link from .models
+    3. Query and get all links into the index view
+    links = Link.objects.all()
+    context = {
+        'links': links
+    }
+    Go to index.html
+    <hr>
+    <ul>
+        {% for link in links %}
+            <li>{{ link.name }} | {{ link.url }}</li>
+        {% endfor %}
+    </ul>
+
+Making the Home Page Pretty with Tailwind CSS:
+
+    Copy code from resources for index.html and _base.html
+    Specify home name for index in urls.py in app folder
+
+Adding Link Shortening Redirect Functionality
+
+    Import get_object_or_404 from django.shortcuts in apps views.py
+    def root_link(request, link_slug):
+    link = get_object_or_404(Link, slug=link_slug)
+    Link.click() # This will increment the click field
+    return redirect(link.url)
+
+    In urls.py app file
+    add another url p[ath to url patterns]
+    import root_link from .views
+    path('<str:link_slug>/', root_link, name='root-link'),
+
+Intro to Forms: Creating Our First Form
+    
+    Create view
+    def add_link(request):
+    return render(request, 'inks/create.html', {})
+    url
+    path('link/create/', add_link, name='add-link'),
+
+Intro to Forms: Creating Our First Form
+
+    Template
+    {% extends 'links/_base.html' %}
+    {% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="link">
+        <input type="submit" value="Create">
+    </form>
+    {% endblock content %}
+
+Using Django Forms to Create Our Link Form
+
+    Creare a forms.py file
+    from django  import forms
+
+    class LinkForm(forms.Form):
+        name = forms.CharField(max_length=50)
+        url = forms.URLField(max_length=200)
+        slug = forms.SlugField(required=False)
+
+    update view
+    def add_link(request):
+    form = LinkForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'links/create.html', context)
+
+Refactoring to Use Django ModelForms to Create and Save a New Link

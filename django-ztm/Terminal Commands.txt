@@ -1,0 +1,6 @@
+py -m venv env – Create Virtual Environment
+source env\Scripts\activate – Activate Virtual Environment
+pip install django - Install Django
+django-admin startproject config . - Create Django Project Whithout New Folder
+py manage.py runserver - Run Server
+python manage.py startapp my_app - Create App

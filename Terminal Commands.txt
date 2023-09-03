@@ -1,0 +1,18 @@
+
+pwd – Present Working Directory
+mkdir – Make directory
+cd – Change Directories
+ls – List Files
+clear – Clear Prompt
+py -m venv env – Create Virtual Environment
+source env\Scripts\activate – Activate Virtual Environment #1
+deactivate – Deactivate Virtual Environment
+pip3 –version – Check pip version
+pip3 list – Check Installed Packages
+pip install django - Install Django
+django-admin startproject jobapp . - Create Django Project Whithout New Folder
+py manage.py runserver - Run Server #2
+py manage.py runserver 8001 - Run Setver at Port 8001
+select interpreter in VSCode
+python manage.py startapp app - Create App
+test

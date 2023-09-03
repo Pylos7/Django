@@ -1,0 +1,82 @@
+Set Up:
+    Create virtual environment
+    Activate virtual environment
+    install django
+    startproject using django-admin
+    startapp using manage.py
+    Create urls.py file in app folder
+    In app folder import path from django.urls
+    In app folder start url patters with index path
+    In project urls.py import include from django.urls
+    In same file add url for empty path pointing to include function with app_name.urls.py
+    Create index view
+    In views.py import HttpResponse from shortcuts
+    In app urls.py import index from .views
+
+Operate Server:
+    runserver with manage.py
+    Shutdown server with CTRL + C in server console
+
+Create Model:
+    Models are all python classes
+    Create class inheriting from models.Model
+    Define fields such as title, description, company and salary.
+    Ex. field_name = models.FieldType(required_param=value)
+
+Make Migrations and Migrate:
+    python manage.py makemigrations
+    python manage.py migrate
+
+Add New Model Instance:
+    Models are Classes inheriting from models.Model
+    class JobPosting(models.Model):
+    # id - starts at 1 and autoincrements
+    title = models.CharField(max_length=100)
+    Make Migrations and Migrate
+
+Adding Our First model instance to the Database:
+    python manage.py shell
+    # from app_name.models import model_name
+    # model_name.objects.all()
+    # model_name.objects.create(title="A Job Title", description="First Job", company="ABC Tech", salary=75000)
+    Make Migrations and Migrate
+
+Grabbing the Model in Our View:
+    Import models from .models into views.py in app_folder
+    Add all objects to a variable in view
+
+Listing our views in Our Template:
+    Add desired views to a variable
+    When sending data to a template we create a dictionary variable (usualy called context)
+    Make it hold the above variable as the value to a corresponding key
+    Make the view return render(request, 'app_folder/index.html', context)
+    {% for posting in job_postings %}
+        <li>{{ posting.title }} | {{ posting.description }} | ${{ posting.salary }}</li>
+    {% endfor %}
+
+Adding Filters to the Job Listings to Update Formatting:
+    Add django.contrib.humanize to installed apps in setings.py
+
+Add details to view:
+    Add new view class to views.py with pk primary key as a second parameter
+    Add url pattern path('job/<int:pk>/', job_detail, name='job-detail'),
+
+Handling "Does Not Exist" Error for Job Details:
+    Import get_object_or_404 from django.shortcuts in views.py
+    Set job_posting = get_object_or_404(JobPosting, pk=pk, is_active=True)
+
+Styling to Our Home And Detail Job Pages:
+    Update files from templates/job_board from https://github.com/vacchiano/ZTM-Django-models/blob/master/job_board/templates/job_board/detail.html
+
+Creating an Admin Super User and First Look at Django Admin Interface:
+    python manage.py createsuperuser nes_x
+    Go to /admin on site
+
+Registering the Job Board Model in the Admin:
+    In admin.py Import JobPosting from .model
+    admin.site.register(JobPosting)
+    Add names to each model object:
+        Modify models.py
+        # Modify name of object
+    def __str__(self):
+        return f"{self.title} | {self.company} | Active: {self.is_active}"

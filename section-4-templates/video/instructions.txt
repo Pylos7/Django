@@ -1,0 +1,39 @@
+Project Setup:
+    Create virtual environment
+    Activate virtual environment
+    Install Django
+    Start django project
+    Start Django app
+    Add app to installed apps in settings.py
+    Add app view
+    Import view in urls.py
+    Add view url un urls.py
+    Run server
+
+Template:
+    In app directory create a templates/app_name/index.html file
+    In views change the returned value to a render instance specifying request, app_name/template_name, {}
+
+Passing Data Into Template:
+    Create tremplate
+    Create view
+    Set up url
+
+Django Template Variables, Tags, and Filters:
+    Variables => {{  first_name }}
+    Tags(Logc) => {% csrf_token %}
+    Filters {{ django|title }}
+
+Django Template Inheritance:
+    Base template is called base.html
+    Defines which blocks will be overwritten => {% block block_name %}{% endblock %}
+    Child teplates:
+        Defines which template is inherited from => {% extends "base.html" %}
+        Includes which blocks will be replaced in base.html base template
+
+Creating Navigation Using Template Inheritance:
+    In urls.py
+
+Uploadig static files:
+    Static files are CCS, Javascript, Images, etc.
+    They are kept and gotten automatically from a static folder in the app folder

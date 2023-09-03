@@ -1,0 +1,10 @@
+Whenever we create a new app we have to go into our project folder/settings.py and add app name to installed apps list.
+
+To create an new view you have to modify the views.py file under your app folder.
+
+To specify wich path calls which view you modify the urls.py file in the project folder.
+
+Django Tepmplate Language:
+    Variables => {{ blog_title }}
+    Tags => { % if has_title % }      - Add Logic
+    Filters => {{ blog_title|title }}
