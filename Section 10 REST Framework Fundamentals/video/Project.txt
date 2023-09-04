@@ -1,0 +1,11 @@
+# Restaurant want to display menu on:
+
+    website
+    mobile app
+    in-store display screens
+    
+     py -m venv env
+     source env/Scripts/activate
+     pip install django
+     django-admin startproject config .
+     py manage.py startapp menu
