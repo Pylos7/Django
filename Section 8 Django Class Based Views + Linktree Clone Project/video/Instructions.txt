@@ -1,0 +1,28 @@
+Resources: https://academy.zerotomastery.io/courses/django-bootcamp/lectures/48611475
+
+Listing Out the Links with a Class Based View using ListView
+    In views.py file in link_plant app
+    Import ListView from django.views.generic
+    Import Profile, Link from .models
+    Create class based View with the bellow logic with a class inheriting
+    from ListView
+
+        class LinkListView(ListView):
+            model = Link
+            # template called model_list.html -> link_list.html
+
+        The below logic is handeled by the above
+        query for all the links Link.objects.all()
+        context={'Link': links}
+        return rendeer(request, 'link_list.html', context)
+
+    Go into project urls
+        Import include from django.urls
+        Add path('', include('link_plant.urls')),
+
+    Create urls.py in app folder
+        Import path from django.urls
+        Import LinkListView
+        Create urlpatterns path list
+        path('', LinkListView.as_view(), name="link-list"),
+        create file in templates\link_plant\link_list.html
